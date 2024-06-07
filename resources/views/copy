@@ -1,0 +1,21 @@
+Route::group(['prefix'=>'clients'],function(){
+
+    //guest middleware
+    Route::group(['middleware'=>'guest'],function(){
+        Route::get('/register', [LoginController::class, 'register'])->name('.register');
+        Route::post('/register_user', [LoginController::class, 'register_user'])->name('.register_user');
+        Route::get('/login', [LoginController::class, 'login'])->name('.login');
+        Route::post('/login_user', [Logincontroller::class, 'login_user'])->name('.login_user');
+    });
+
+
+    Route::group(['middleware'=>'Auth'],function(){
+
+        Route::get('/dashboard', [Dashboardcontroller::class, 'dashboard'])->name('.dashboard');
+        Route::get('/logout', [LoginController::class, 'logout'])->name('.logout');
+
+        });
+
+
+
+});
