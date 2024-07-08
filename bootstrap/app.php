@@ -11,8 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'admin.Auth' => App\Http\Middleware\AdminAuth::class,
+            'client.Auth' => App\Http\Middleware\ClientAuth::class,
+
+
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+        // Add your exception handling logic here
+    })
+    ->create();
+
